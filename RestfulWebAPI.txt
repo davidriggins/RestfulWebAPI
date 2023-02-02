@@ -1,0 +1,94 @@
+
+HTTP Request
+	Contains:
+		Verb 	- What is the action the server needs to take
+		Headers - Information about the request
+		Content - An optional field (data)
+		
+	Example:
+		Post
+		Content Length: 9
+		Magic API
+
+HTTP Response
+	Contains:
+		Status code	- Identifies how the request was processed
+		Headers		- Information about the response
+		Content		- An optional field (data)
+		
+	Example:
+		201
+		Content Type: text
+		Magic API
+		
+Request Object:
+	HTTP Verbs/Actions
+		Get		- Fetches/Requests resource
+		Post	- Creates/inserts resource
+		Put		- Updates/modifies resource
+		Patch	- Updates/modifies partial resource
+		Delete	- Deletes/removes resource
+		
+	HTTP Header (requests metadata)
+		Content Type	- Content's format
+		Content Length	- Size of the content
+		Authorization	- Who is making the request
+		Accept			- What are the accepted type(s)
+
+	Request's Content (optional)
+		HTML, CSS, XML, JSON
+		Information for the request
+		Blobs etc.
+	
+Response Object:
+	Status Code: (a number that represents what was done on the server and it's results
+		100-199	- Informational
+		200-299	- Success
+			200 - Ok
+			201	- Created
+			204 - No content
+		300-399 - Redirection
+		400-499	- Client Errors
+			400	- Bad request
+			404 - Not found
+			409 - Conflict
+		500-599	- Server Errors
+			500	- Internal Server Errors
+
+Create Project
+	Select to create a new project.
+	Select ASP.NET Core Web API
+	Project Name: MagicVilla_VillaAPI
+	Solution Name: MagicVilla
+	=>Next
+	Select .NET 7
+	=>Create
+
+	Delete the WeatherForecast.cs and WeatherForecastController.cs files
+
+	Add a new class called VillaAPIController.cs in the Controllers folder
+	Have it derive from : ControllerBase
+		- If it were to derive from Controller, it would put in overhead for Views
+	Add [ApiController] attribrute to class.
+	
+	Create a new folder called Models
+	Add a new class called "Villa" to the Models folder.
+		public int Id { get; set; }
+        public string Name { get; set; }
+	
+	Create the following endpoint in the API Controller:
+		public IEnumerable<Villa> GetVillas()
+        {
+            return new List<Villa>
+            {
+                new Villa {Id=1,Name="Pool View"},
+                new Villa {Id=2,Name="Beach View"}
+            };
+        }
+		
+	Create a route for the endpoint by adding [Route("api/VillaAPI")] attribute.
+	Create the action attribute [HttpGet] for the endpoint.
+	
+	You can automatically use the controller name in the routing endpoint:
+		[Route("api/[controller]")] // Does not reccommend though
+	
