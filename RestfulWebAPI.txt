@@ -113,3 +113,14 @@ Create Project
 		
 		In the Program.cs file, at the end of builder.Services.AddControllers(), add
 			.AddNewtonsoftJson()
+	
+	Content Negotiation.  Only allow specific content type by adding:
+		option =>
+		{
+			option.ReturnHttpNotAcceptable = true;
+		}
+	inside of AddControllers() in the Program.cs file.
+	
+	Allow xml content by adding:
+		.AddXmlDataContractSerializerFormatters()
+	to the end of the AddControllers() statement in Program.cs.
