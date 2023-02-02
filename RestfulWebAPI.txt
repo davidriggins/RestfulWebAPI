@@ -106,3 +106,10 @@ Create Project
 	You can automatically use the controller name in the routing endpoint:
 		[Route("api/[controller]")] // Does not reccommend though
 	
+	
+	Add these two Nuget packages for Patch support:
+		Microsoft.AspNetCore.JsonPatch
+		Microsoft.AspNetCore.Mvc.NewtonsoftJson
+		
+		In the Program.cs file, at the end of builder.Services.AddControllers(), add
+			.AddNewtonsoftJson()
