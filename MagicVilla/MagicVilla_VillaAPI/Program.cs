@@ -1,4 +1,6 @@
+using MagicVilla_VillaAPI.Data;
 using MagicVilla_VillaAPI.Logging;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +18,13 @@ builder.Services.AddControllers(option =>
 {
     //// This option enforces content type
     //option.ReturnHttpNotAcceptable = true;
+
+
+    // Use ApplicationDbContext and reference Connection String.
+    builder.Services.AddDbContext<ApplicationDbContext>(option =>
+    {
+        option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultSQLConnection"));
+    });
 
     // The AddXmlData... extension serializes data to XML of requested content type
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
