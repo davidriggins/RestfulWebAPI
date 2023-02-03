@@ -125,6 +125,12 @@ Create Project
 		.AddXmlDataContractSerializerFormatters()
 	to the end of the AddControllers() statement in Program.cs.
 	
+	
+	Install Entity Framework NuGet Packages:
+		Microsoft.EntityFrameworkCore.SqlServer (this will install the Core as well)
+		Microsoft.EntityFrameworkCore.Tools
+	
+	
 Serilog Logger:
 	Install the following NuGet packages:
 		Serilog.AspNetCore

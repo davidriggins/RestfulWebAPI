@@ -135,4 +135,9 @@ Serilog Logger:
 			.WriteTo.File("log/villaLogs.txt", rollingInterval:RollingInterval.Day)
 			.CreateLogger();
 		builder.Host.UseSerilog();
-	
+
+Custom Logger:
+	Created an Interface and class to implement a simple logger.
+	Registered the logger in Program.cs:
+		builder.Services.AddSingleton<ILogging, Logging>();
+	Used DI to inject logging service where we wanted to use it.
