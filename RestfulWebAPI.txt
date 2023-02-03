@@ -124,3 +124,15 @@ Create Project
 	Allow xml content by adding:
 		.AddXmlDataContractSerializerFormatters()
 	to the end of the AddControllers() statement in Program.cs.
+	
+Serilog Logger:
+	Install the following NuGet packages:
+		Serilog.AspNetCore
+		Serilog.Sinks.File
+	
+	Register it with the application by adding the following to Program.cs
+		Log.Logger = new LoggerConfiguration().MinimumLevel.Debug()
+			.WriteTo.File("log/villaLogs.txt", rollingInterval:RollingInterval.Day)
+			.CreateLogger();
+		builder.Host.UseSerilog();
+	
