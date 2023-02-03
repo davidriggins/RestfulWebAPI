@@ -130,6 +130,10 @@ Create Project
 		Microsoft.EntityFrameworkCore.SqlServer (this will install the Core as well)
 		Microsoft.EntityFrameworkCore.Tools
 	
+	Database Migration:
+		add-migration AddVillaTable
+		update-database
+		
 	
 Serilog Logger:
 	Install the following NuGet packages:
