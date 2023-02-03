@@ -14,7 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers(option =>
 {
+    //// This option enforces content type
     //option.ReturnHttpNotAcceptable = true;
+
+    // The AddXmlData... extension serializes data to XML of requested content type
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
