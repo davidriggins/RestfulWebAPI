@@ -151,3 +151,25 @@ Custom Logger:
 	Registered the logger in Program.cs:
 		builder.Services.AddSingleton<ILogging, Logging>();
 	Used DI to inject logging service where we wanted to use it.
+	
+	
+
+
+davidriggins git recovery codes:
+
+8bb46-79789 
+6d696-ea909 
+bf1aa-93746 
+89cf1-4b8c7 
+2b877-2044d 
+e3289-c83f9 
+5ec7f-f8994 
+3fda1-0fb1e 
+8576d-f25c4 
+567d8-375c5 
+55556-9c3e0 
+60970-d20e3 
+00a23-1432f 
+b1e7c-33afb 
+3b332-27d34 
+4ddc3-f52ec
