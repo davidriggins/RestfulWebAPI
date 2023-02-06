@@ -111,6 +111,8 @@ Create Project
 		Microsoft.AspNetCore.JsonPatch
 		Microsoft.AspNetCore.Mvc.NewtonsoftJson
 		
+		Create a MappingConfig.cs file under the Project.
+		
 		In the Program.cs file, at the end of builder.Services.AddControllers(), add
 			.AddNewtonsoftJson()
 	
@@ -133,6 +135,13 @@ Create Project
 	Database Migration:
 		add-migration AddVillaTable
 		update-database
+		
+	Add AutoMapper NuGet Packages
+		- AutoMapper
+		- AutoMapper.Extensions.Microsoft.DependencyInjection
+		
+	Add AutoMapper capability in Program.cs:
+		
 		
 	
 Serilog Logger:
