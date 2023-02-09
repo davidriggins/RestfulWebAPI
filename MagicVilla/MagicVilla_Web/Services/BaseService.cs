@@ -2,6 +2,7 @@
 using MagicVilla_Web.Models;
 using MagicVilla_Web.Services.IServices;
 using Newtonsoft.Json;
+using System.Net;
 using System.Text;
 
 namespace MagicVilla_Web.Services
@@ -26,13 +27,13 @@ namespace MagicVilla_Web.Services
                 message.Headers.Add("Accept", "application/json");
                 message.RequestUri = new Uri(apiRequest.Url);
 
-                if (apiRequest.Data!= null)
+                if (apiRequest.Data != null)
                 {
                     message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data),
                         Encoding.UTF8, "application/json");
                 }
 
-                switch(apiRequest.ApiType)
+                switch (apiRequest.ApiType)
                 {
                     case SD.ApiType.POST:
                         message.Method = HttpMethod.Post;
@@ -53,9 +54,30 @@ namespace MagicVilla_Web.Services
 
                 var apiContent = await apiResponse.Content.ReadAsStringAsync();
 
-                // Deserialize
-                var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
+                try
+                {
+                    // Deserialize
+                    APIResponse ApiResponse = JsonConvert.DeserializeObject<APIResponse>(apiContent);
+                    if (apiResponse.StatusCode == HttpStatusCode.BadRequest
+                     || apiResponse.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        ApiResponse.StatusCode = HttpStatusCode.BadRequest;
+                        ApiResponse.IsSuccess = false;
 
+                        // Serialize
+                        var res = JsonConvert.SerializeObject(ApiResponse);
+                        var returnObj = JsonConvert.DeserializeObject<T>(res);
+                        return returnObj;
+                    }
+                }
+                catch (Exception e)
+                {
+                    // Deserialize
+                    var exceptionResponse = JsonConvert.DeserializeObject<T>(apiContent);
+                    return exceptionResponse;
+                }
+
+                var APIResponse = JsonConvert.DeserializeObject<T>(apiContent);
                 return APIResponse;
 
             }
@@ -63,8 +85,8 @@ namespace MagicVilla_Web.Services
             {
                 var dto = new APIResponse
                 {
-                    ErrorMessages = new List<string> { Convert.ToString(e.Message)},
-                    IsSuccess=false
+                    ErrorMessages = new List<string> { Convert.ToString(e.Message) },
+                    IsSuccess = false
                 };
 
                 var res = JsonConvert.SerializeObject(dto);

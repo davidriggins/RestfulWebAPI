@@ -76,6 +76,19 @@ namespace MagicVilla_Web.Controllers
                 }
             }
 
+            var resp = await _villaService.GetAllAsync<APIResponse>();
+            if (resp != null && resp.IsSuccess)
+            {
+                // Convert the response to a string and Deserialize the
+                // Object to a list of DTOs
+                model.VillaList = JsonConvert.DeserializeObject<List<VillaDTO>>
+                    (Convert.ToString(resp.Result))
+                    .Select(i => new SelectListItem
+                    {
+                        Text = i.Name,
+                        Value = i.Id.ToString()
+                    });
+            }
             return View(model);
         }
 
