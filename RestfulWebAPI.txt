@@ -162,6 +162,8 @@ Custom Logger:
 	Used DI to inject logging service where we wanted to use it.
 	
 	
+Project Token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IjEiLCJyb2xlIjoiYWRtaW4iLCJuYmYiOjE2NzU5ODkyMzAsImV4cCI6MTY3ODY2NzYzMCwiaWF0IjoxNjc1OTg5MjMwfQ.csaXRpMtsT05TesF3TW7GZJYv9zBiHAFQB8GoV9qukE
 
 
 davidriggins git recovery codes:

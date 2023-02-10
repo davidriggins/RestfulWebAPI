@@ -41,9 +41,9 @@ namespace MagicVilla_VillaAPI.Repository
             {
                 return new LoginResponseDTO()
                 {
-                    Token="",
-                    User=null
-                }
+                    Token = "",
+                    User = null
+                };
             }
 
             // If user was found, generate JWT Token
