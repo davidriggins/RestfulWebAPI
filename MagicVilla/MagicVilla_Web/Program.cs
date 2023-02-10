@@ -20,6 +20,9 @@ builder.Services.AddScoped<IVillaService, VillaService>();
 builder.Services.AddScoped<IVillaNumberService, VillaNumberService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
+// Register IHttpContextAccessor for DI
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 // Add distributed memory cache and Sessions
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
