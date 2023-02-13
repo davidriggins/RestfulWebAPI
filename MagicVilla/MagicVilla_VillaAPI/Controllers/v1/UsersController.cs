@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
 using System.Net;
 
-namespace MagicVilla_VillaAPI.Controllers
+namespace MagicVilla_VillaAPI.Controllers.v1
 {
     [Route("api/v{version:apiVersion}/UsersAuth")]
     [ApiController]
@@ -18,7 +18,7 @@ namespace MagicVilla_VillaAPI.Controllers
         public UsersController(IUserRepository userRepo)
         {
             _userRepo = userRepo;
-            this._response = new APIResponse();
+            _response = new APIResponse();
         }
 
 
@@ -28,16 +28,16 @@ namespace MagicVilla_VillaAPI.Controllers
             var loginResponse = await _userRepo.Login(model);
             if (loginResponse.User == null || string.IsNullOrEmpty(loginResponse.Token))
             {
-                _response.StatusCode=HttpStatusCode.BadRequest;
-                _response.IsSuccess=false;
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
                 _response.ErrorMessages.Add("Username or password is incorrect.");
 
                 return BadRequest(_response);
             }
 
-            _response.StatusCode= HttpStatusCode.OK;
-            _response.IsSuccess= true;
-            _response.Result= loginResponse;
+            _response.StatusCode = HttpStatusCode.OK;
+            _response.IsSuccess = true;
+            _response.Result = loginResponse;
 
             return Ok(_response);
 
@@ -51,8 +51,8 @@ namespace MagicVilla_VillaAPI.Controllers
 
             if (!ifUserNameUnique)
             {
-                _response.StatusCode=HttpStatusCode.BadRequest;
-                _response.IsSuccess=false;
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
                 _response.ErrorMessages.Add("Username already exists.");
 
                 return BadRequest(_response);
@@ -69,7 +69,7 @@ namespace MagicVilla_VillaAPI.Controllers
             }
 
             _response.StatusCode = HttpStatusCode.OK;
-            _response.IsSuccess= true;
+            _response.IsSuccess = true;
 
             return Ok(_response);
         }
