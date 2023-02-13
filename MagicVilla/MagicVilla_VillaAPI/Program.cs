@@ -76,6 +76,13 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddControllers(option =>
 {
+    // Add general cache profiler.
+    option.CacheProfiles.Add("Default30",
+        new CacheProfile()
+        {
+            Duration = 30
+        });
+
     //// This option enforces content type
     //option.ReturnHttpNotAcceptable = true;
 
