@@ -4,6 +4,7 @@ using MagicVilla_VillaAPI.Logging;
 using MagicVilla_VillaAPI.Repository;
 using MagicVilla_VillaAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
@@ -35,6 +36,13 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 // Add AutoMapper service
 builder.Services.AddAutoMapper(typeof(MappingConfig));
+
+// Add API versioning support
+builder.Services.AddApiVersioning(options =>
+{
+    options.AssumeDefaultVersionWhenUnspecified = true;
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+});
 
 // Add Authentication
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
