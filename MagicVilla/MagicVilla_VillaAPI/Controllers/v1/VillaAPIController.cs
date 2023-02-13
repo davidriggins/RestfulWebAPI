@@ -30,6 +30,8 @@ namespace MagicVilla_VillaAPI.Controllers.v1
 
 
         [HttpGet]
+        // Cache what is being returned every 30 seconds.
+        [ResponseCache(Duration =30)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -61,6 +63,7 @@ namespace MagicVilla_VillaAPI.Controllers.v1
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         //[ProducesResponseType(200, Type =typeof(VillaDTO))]
+        //[ResponseCache(Location =ResponseCacheLocation.None,NoStore =true)]
         public async Task<ActionResult<APIResponse>> GetVilla(int id)
         {
             try
