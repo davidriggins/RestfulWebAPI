@@ -16,17 +16,20 @@ namespace MagicVilla_VillaAPI.Repository
         private readonly ApplicationDbContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private string secretKey;
 
         public UserRepository(ApplicationDbContext db,
             IConfiguration configuration,
             UserManager<ApplicationUser> userManager,
-            IMapper mapper)
+            IMapper mapper,
+            RoleManager<IdentityRole> roleManager)
         {
             _db = db;
             secretKey = configuration.GetValue<string>("ApiSettings:Secret");
             _userManager = userManager;
             _mapper = mapper;
+            _roleManager = roleManager;
         }
 
         public bool IsUniqueUser(string username)
@@ -100,6 +103,13 @@ namespace MagicVilla_VillaAPI.Repository
                 var result = await _userManager.CreateAsync(user, registrationRequestDTO.Password);
                 if (result.Succeeded)
                 {
+                    // ONLY USE THIS TO SEED THE DATABASE ONE TIME
+                    if (!_roleManager.RoleExistsAsync("admin").GetAwaiter().GetResult())
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole("admin"));
+                        await _roleManager.CreateAsync(new IdentityRole("customer"));
+                    }
+
                     await _userManager.AddToRoleAsync(user, "admin");
                     var userToReturn = _db.ApplicationUsers
                         .FirstOrDefault(u => u.UserName == registrationRequestDTO.UserName);
